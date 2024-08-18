@@ -396,7 +396,7 @@ export default function Generate() {
         <Link href="/" passHref style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
             <Typography component="span">Flashcard SaaS</Typography>
           </Link>
-          <Button variant="contained" sx={{mr:2}} href="https://forms.gle/BaPiXZKKKfa5Dk2X7">Feedback</Button>
+          <Button variant="contained" sx={{mr:2}} href="https://forms.gle/BMNEuzV2WQvKJ9Lp6">Feedback</Button>
           <SignedOut>
             <Button variant="contained" sx={{mr:2}} href="/sign-in">Sign In</Button>
             <Button variant="contained" href="/sign-up">Sign Up</Button>
