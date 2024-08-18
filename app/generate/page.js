@@ -245,6 +245,7 @@ export default function Generate() {
     </Container>
   )
 } */
+
 'use client'
 
 import { useState } from 'react'
@@ -295,15 +296,15 @@ export default function Generate() {
   const [open, setOpen] = useState(false)
   const [numFlashcards, setNumFlashcards] = useState('');
   const [flashcardTypes, setFlashcardTypes] = useState([]);
-  const [alertOpen, setAlertOpen] = useState(false); // State to control alert visibility
+  const [alertOpen, setAlertOpen] = useState(false); 
   const router = useRouter()
 
   const availableFlashcardTypes = [
-    'Definition',
     'Question-Answer',
+    'Definition',
     'Fill-in-the-blank',
     'True/False',
-    'Concept explanation',
+    'Further Explanation',
   ];
 
   const handleSubmit = async () => {
@@ -350,8 +351,8 @@ export default function Generate() {
   };
 
   const saveFlashcards = async () => {
-    if (!isSignedIn) { // Check if the user is signed in
-      setAlertOpen(true); // Show the alert if not signed in
+    if (!isSignedIn) { 
+      setAlertOpen(true); 
       return;
     }
   
@@ -390,187 +391,182 @@ export default function Generate() {
   
 
   return (
-    <Container maxWidth="100vw">
-      <AppBar position="static">
+    <Container maxWidth="100vw" sx={{ backgroundColor: '#000000', minHeight: '100vh', padding: '0', color: '#ffffff' }}>
+      <AppBar position="static" sx={{ backgroundColor: '#1a1a1a', borderBottom: '2px solid #98c1a2' }}>
         <Toolbar>
-        <Link href="/" passHref style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+          <Link href="/" passHref style={{ textDecoration: 'none', color: '#ffffff', flexGrow: 1 }}>
             <Typography component="span">Flashcard SaaS</Typography>
           </Link>
-          <Button variant="contained" sx={{mr:2}} href="https://forms.gle/BMNEuzV2WQvKJ9Lp6">Feedback</Button>
+          <Button variant="contained" sx={{ mr: 2, backgroundColor: '#98c1a2', color: '#2f4f4f' }} href="https://forms.gle/BMNEuzV2WQvKJ9Lp6">Feedback</Button>
           <SignedOut>
-            <Button variant="contained" sx={{mr:2}} href="/sign-in">Sign In</Button>
-            <Button variant="contained" href="/sign-up">Sign Up</Button>
+            <Button variant="contained" sx={{ mr: 2, backgroundColor: '#98c1a2', color: '#2f4f4f' }} href="/sign-in">Sign In</Button>
+            <Button variant="contained" sx={{ backgroundColor: '#98c1a2', color: '#2f4f4f' }} href="/sign-up">Sign Up</Button>
           </SignedOut>
 
           <SignedIn>
-            <Button variant="contained" sx={{mr:2}} href="/generate">Generate</Button>
-            <Button variant="contained" sx={{mr:2}} href="/flashcards">Flashcards</Button>
+            <Button variant="contained" sx={{ mr: 2, backgroundColor: '#98c1a2', color: '#2f4f4f' }} href="/generate">Generate</Button>
+            <Button variant="contained" sx={{ mr: 2, backgroundColor: '#98c1a2', color: '#2f4f4f' }} href="/flashcards">Flashcards</Button>
             <UserButton />
           </SignedIn>
         </Toolbar>
       </AppBar>
+
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#ffffff' }}>
           Generate Flashcards
         </Typography>
-        <>
-      <TextField
-        fullWidth
-        label="Number of Flashcards. If unsure, leave blank and AI will decide for you."
-        type="number"
-        value={numFlashcards}
-        onChange={(e) => setNumFlashcards(e.target.value)}
-        sx={{ mb: 2, mt: 2 }}
-      />
-      
-      <FormControl fullWidth sx={{ mb: 2, minWidth: 200 }}>
-        <InputLabel id="flashcard-types-label">Flashcard Types</InputLabel>
-        <Select
-          labelId="flashcard-types-label"
-          multiple
-          value={flashcardTypes}
-          onChange={(e) => setFlashcardTypes(e.target.value)}
-          input={<OutlinedInput label="Flashcard Types" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-        >
-          {availableFlashcardTypes.map((type) => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      
-      <TextField
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        label="Enter text"
-        fullWidth
-        multiline
-        rows={4}
-        variant="outlined"
-        sx={{ mb: 2 }}
-      />
-    </>
+
+        <TextField
+          fullWidth
+          label="Number of Flashcards. If you are not sure, leave it blank. The AI will decide for you!"
+          type="number"
+          value={numFlashcards}
+          onChange={(e) => setNumFlashcards(e.target.value)}
+          sx={{ mb: 2, mt: 2, backgroundColor: '#1a1a1a', input: { color: '#ffffff' }, label: { color: '#b2d8d8' } }}
+        />
+
+        <FormControl fullWidth sx={{ mb: 2 }}>
+          <InputLabel id="flashcard-types-label" sx={{ color: '#b2d8d8' }}>Flashcard Types</InputLabel>
+          <Select
+            labelId="flashcard-types-label"
+            multiple
+            value={flashcardTypes}
+            onChange={(e) => setFlashcardTypes(e.target.value)}
+            input={<OutlinedInput label="Flashcard Types" sx={{ color: '#ffffff' }} />}
+            renderValue={(selected) => (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                {selected.map((value) => (
+                  <Chip key={value} label={value} sx={{ backgroundColor: '#98c1a2', color: '#2f4f4f' }} />
+                ))}
+              </Box>
+            )}
+          >
+            {availableFlashcardTypes.map((type) => (
+              <MenuItem key={type} value={type}>
+                {type}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <TextField
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          label="Enter text"
+          fullWidth
+          multiline
+          rows={4}
+          variant="outlined"
+          sx={{ mb: 2, backgroundColor: '#1a1a1a', textarea: { color: '#ffffff' }, label: { color: '#b2d8d8' } }}
+        />
 
         <Button
           variant="contained"
-          color="primary"
+          sx={{ backgroundColor: '#98c1a2', color: '#2f4f4f' }}
           onClick={handleSubmit}
           fullWidth
         >
           Generate Flashcards
         </Button>
       </Box>
-      
-      {flashcards.length > 0 && (
-  <Box sx={{ mt: 4 }}>
-    <Typography variant="h5" component="h2" gutterBottom>
-      Generated Flashcards
-    </Typography>
-    <Grid container spacing={2}>
-      {flashcards.map((flashcard, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index}>
-          <Card>
-          <CardActionArea onClick={()=>(
-            handleCardClick(index)
-          )}>
-            <CardContent>
-              <Box sx={{
-                perspective: '1000px',
-                '& > div': {
-                  transition: 'transform 0.6s',
-                  transformStyle: 'preserve-3d', 
-                  position: 'relative', 
-                  width: '100%', 
-                  height: '208px', 
-                  boxShadow: '0 4px 8px 8 rgba(0,0,0, 0.2)', 
-                  transform: flipped[index]
-                  ? 'rotateY(180deg)' 
-                  : 'rotateY(0deg)', 
-                },'& > div > div:nth-of-type(2)':{ 
-                  transform: 'rotateY(180deg)' 
-                }, '& > div > div': { 
-                  position: 'absolute', 
-                  width: '100%', 
-                  height: '100%', 
-                  backfaceVisibility: 'hidden', 
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  padding: 2,
-                  boxSizing: 'border-box'
-                },  
-              }}>
-                <div>
-                  <div>
-                    <Typography variant="h5" component="div" sx={{ textAlign: 'center' }}>{flashcard.front}
-                    </Typography>
-                    </div>
-                    <div>
-                    <Typography variant="h5" component="div" sx={{ textAlign: 'center' }}>{flashcard.back}
-                    </Typography>
-                    </div>
-                  </div>
-                  </Box>
-            </CardContent>
-          </CardActionArea>
-          </Card>
-        </Grid>
-      ))}
-      </Grid>
-        <Box  sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => setOpen(true)}
-          >
-          Save
-          </Button>
-          </Box>
-  </Box>
-)}
-    <Dialog open={open} onClose={handleCloseDialog}>
-      <DialogTitle>Save Flashcard Set</DialogTitle>
-      <DialogContent>
-      <DialogContentText>
-      Please enter a name for your flashcard set.
-    </DialogContentText>
-    <TextField
-      autoFocus
-      margin="dense"
-      label="Set Name"
-      type="text"
-      fullWidth
-      value={name}
-      onChange={(e) => setName(e.target.value)}>
-        </TextField>
-  </DialogContent>
-  <DialogActions>
-    <Button onClick={handleCloseDialog}>Cancel</Button>
-    <Button onClick={saveFlashcards} color="primary">
-      Save
-    </Button>
-  </DialogActions>
-</Dialog>
 
-      {/* Alert for not being signed in */}
+      {flashcards.length > 0 && (
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h5" component="h2" gutterBottom sx={{ color: '#ffffff' }}>
+            Generated Flashcards
+          </Typography>
+          <Grid container spacing={2}>
+            {flashcards.map((flashcard, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card sx={{ backgroundColor: '#1a1a1a', color: '#ffffff' }}>
+                  <CardActionArea onClick={() => handleCardClick(index)}>
+                    <CardContent>
+                      <Box sx={{
+                        perspective: '1000px',
+                        '& > div': {
+                          transition: 'transform 0.6s',
+                          transformStyle: 'preserve-3d', 
+                          position: 'relative', 
+                          width: '100%', 
+                          height: '208px', 
+                          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', 
+                          transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)', 
+                        }, 
+                        '& > div > div:nth-of-type(2)': { 
+                          transform: 'rotateY(180deg)' 
+                        }, 
+                        '& > div > div': { 
+                          position: 'absolute', 
+                          width: '100%', 
+                          height: '100%', 
+                          backfaceVisibility: 'hidden', 
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          padding: 2,
+                          boxSizing: 'border-box'
+                        },  
+                      }}>
+                        <div>
+                          <div>
+                            <Typography variant="h5" component="div" sx={{ textAlign: 'center' }}>{flashcard.front}</Typography>
+                          </div>
+                          <div>
+                            <Typography variant="h5" component="div" sx={{ textAlign: 'center' }}>{flashcard.back}</Typography>
+                          </div>
+                        </div>
+                      </Box>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: '#98c1a2', color: '#2f4f4f' }}
+              onClick={() => setOpen(true)}
+            >
+              Save
+            </Button>
+          </Box>
+        </Box>
+      )}
+
+      <Dialog open={open} onClose={handleCloseDialog}>
+        <DialogTitle sx={{ color: '#ffffff' }}>Save Flashcard Set</DialogTitle>
+        <DialogContent sx={{ backgroundColor: '#1a1a1a', color: '#ffffff' }}>
+          <DialogContentText sx={{ color: '#b2d8d8' }}>
+            Please enter a name for your flashcard set.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Set Name"
+            type="text"
+            fullWidth
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            sx={{ backgroundColor: '#1a1a1a', input: { color: '#ffffff' }, label: { color: '#b2d8d8' } }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ backgroundColor: '#1a1a1a' }}>
+          <Button onClick={handleCloseDialog} sx={{ color: '#98c1a2' }}>Cancel</Button>
+          <Button onClick={saveFlashcards} sx={{ color: '#98c1a2' }}>Save</Button>
+        </DialogActions>
+      </Dialog>
+
       <Dialog open={alertOpen} onClose={handleCloseAlert}>
-        <DialogTitle>Not Signed In</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
+        <DialogTitle sx={{ color: '#ffffff' }}>Not Signed In</DialogTitle>
+        <DialogContent sx={{ backgroundColor: '#1a1a1a', color: '#ffffff' }}>
+          <DialogContentText sx={{ color: '#b2d8d8' }}>
             You need to be signed in to save your flashcards. Please sign in or create an account and try generating the cards again.
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseAlert}>Close</Button>
-          <Button onClick={() => router.push('/sign-in')} color="primary">
+        <DialogActions sx={{ backgroundColor: '#1a1a1a' }}>
+          <Button onClick={handleCloseAlert} sx={{ color: '#98c1a2' }}>Close</Button>
+          <Button onClick={() => router.push('/sign-in')} sx={{ color: '#98c1a2' }}>
             Sign In
           </Button>
         </DialogActions>
