@@ -23,6 +23,5 @@ const db = getFirestore(app);
 //const firestore = getFirestore();
 //const analytics = getAnalytics(app);
 export default db;
-
-//export{db};
+export{db};
 //export{firestore};
