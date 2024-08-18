@@ -13,6 +13,10 @@
     "@clerk/nextjs": "^5.3.1",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+<<<<<<< HEAD
+=======
+    "@google/generative-ai": "^0.17.0",
+>>>>>>> ce90d30396ebdf767e28871f7bc21241f09b353c
     "@mui/material": "^5.16.7",
     "@stripe/stripe-js": "^4.3.0",
     "firebase": "^10.13.0",
